@@ -1,0 +1,243 @@
+.header {
+  height: 105px;
+  padding: 0 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  border-bottom: 1px solid #e7e9ef;
+  position: relative;
+  z-index: 100;
+}
+
+.college-brand {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.logo-box {
+  width: 62px;
+  height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  background: #eee9ff;
+  border: 1px solid #d9ceff;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.logo-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.college-text h1 {
+  margin: 0;
+  color: #202033;
+  font-size: 22px;
+  line-height: 1.2;
+  font-weight: 750;
+  letter-spacing: -0.4px;
+}
+
+.college-text p {
+  margin: 5px 0 0;
+  color: #77798a;
+  font-size: 15px;
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.main-nav a {
+  position: relative;
+  color: #343447;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 600;
+  transition: .25s;
+}
+
+.main-nav a:not(.student-btn)::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -7px;
+  width: 0;
+  height: 2px;
+  background: #5d43cf;
+  transition: .25s;
+}
+
+.main-nav a:not(.student-btn):hover {
+  color: #5d43cf;
+}
+
+.main-nav a:not(.student-btn):hover::after {
+  width: 100%;
+}
+
+.student-btn {
+  padding: 14px 20px;
+  background: linear-gradient(135deg, #6848d5, #5135bd);
+  color: #fff !important;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(91, 62, 201, .25);
+  transition: .25s;
+}
+
+.student-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(91, 62, 201, .35);
+}
+
+
+/* HAMBURGER */
+
+.menu-toggle {
+  display: none;
+  width: 45px;
+  height: 45px;
+  padding: 9px;
+  border: 0;
+  border-radius: 10px;
+  background: #f0ecff;
+  cursor: pointer;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 4px auto;
+  border-radius: 5px;
+  background: #5135bd;
+}
+
+
+/* TABLET */
+
+@media (max-width: 1100px) {
+  .main-nav {
+    gap: 18px;
+  }
+
+  .main-nav a {
+    font-size: 14px;
+  }
+
+  .college-text h1 {
+    font-size: 19px;
+  }
+}
+
+
+/* MOBILE */
+
+@media (max-width: 850px) {
+
+  .header {
+    height: 82px;
+    padding: 10px 5%;
+  }
+
+  .college-brand {
+    gap: 12px;
+  }
+
+  .logo-box {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+  }
+
+  .college-text h1 {
+    font-size: 17px;
+  }
+
+  .college-text p {
+    margin-top: 3px;
+    font-size: 12px;
+  }
+
+  /* Show three lines */
+  .menu-toggle {
+    display: block;
+  }
+
+  /* Hide menu initially */
+  .main-nav {
+    display: none;
+    position: absolute;
+    top: 82px;
+    left: 0;
+    width: 100%;
+    padding: 20px 5%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background: #fff;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #ddd;
+    box-shadow: 0 15px 30px rgba(0,0,0,.08);
+  }
+
+  /* Show when hamburger clicked */
+  .main-nav.open {
+    display: flex;
+  }
+
+  .main-nav a {
+    padding: 14px 5px;
+    font-size: 15px;
+    border-bottom: 1px solid #f0eef5;
+  }
+
+  .main-nav a:not(.student-btn)::after {
+    display: none;
+  }
+
+  .student-btn {
+    margin-top: 12px;
+    text-align: center;
+    border: 0 !important;
+  }
+}
+
+
+/* SMALL MOBILE */
+
+@media (max-width: 500px) {
+
+  .header {
+    padding: 10px 4%;
+  }
+
+  .college-text h1 {
+    font-size: 15px;
+  }
+
+  .college-text p {
+    font-size: 11px;
+  }
+
+  .logo-box {
+    width: 48px;
+    height: 48px;
+  }
+
+  .menu-toggle {
+    width: 42px;
+    height: 42px;
+  }
+}

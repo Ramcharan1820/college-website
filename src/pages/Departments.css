@@ -1,0 +1,401 @@
+/* =========================================
+   DEPARTMENTS PAGE
+   ========================================= */
+
+.departments-page {
+  width: 100%;
+  background: #f5f7fb;
+}
+
+
+/* =========================================
+   HERO
+   ========================================= */
+
+.departments-hero {
+  position: relative;
+
+  min-height: 370px;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      135deg,
+      #963721 0%
+    );
+
+  display: flex;
+  align-items: center;
+}
+
+.departments-hero-content {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  max-width: 1100px;
+
+  margin: 0 auto;
+
+  padding: 70px 40px;
+}
+
+.section-label {
+  display: inline-block;
+
+  margin-bottom: 18px;
+
+  color: #f4b928;
+
+  font-size: 13px;
+  font-weight: 800;
+
+  letter-spacing: 2px;
+}
+
+.departments-hero h1 {
+  margin: 0 0 18px;
+
+  color: #ffffff;
+
+  font-size: clamp(48px, 6vw, 72px);
+
+  line-height: 1;
+
+  font-weight: 800;
+
+  letter-spacing: -2px;
+}
+
+.departments-hero p {
+  max-width: 780px;
+
+  margin: 0;
+
+  color: #dce7f8;
+
+  font-size: 18px;
+
+  line-height: 1.8;
+}
+
+
+/* =========================================
+   HERO DECORATION
+   ========================================= */
+
+.hero-circle {
+  position: absolute;
+
+  border: 1px solid rgba(255, 255, 255, 0.09);
+
+  border-radius: 50%;
+}
+
+.hero-circle-one {
+  width: 360px;
+  height: 360px;
+
+  right: -70px;
+  top: -120px;
+}
+
+.hero-circle-two {
+  width: 260px;
+  height: 260px;
+
+  right: 45px;
+  top: -50px;
+}
+
+
+/* =========================================
+   DEPARTMENT SECTION
+   ========================================= */
+
+.departments-section {
+  max-width: 1100px;
+
+  margin: 0 auto;
+
+  padding: 85px 40px 110px;
+}
+
+.section-label.dark {
+  color: #d99d00;
+
+  margin-bottom: 12px;
+}
+
+.departments-heading h2 {
+  margin: 0 0 12px;
+
+  color: #0b3478;
+
+  font-size: 42px;
+
+  line-height: 1.15;
+
+  font-weight: 800;
+}
+
+.departments-heading p {
+  margin: 0;
+
+  color: #66758c;
+
+  font-size: 17px;
+
+  line-height: 1.7;
+}
+
+
+/* =========================================
+   CARDS GRID
+   ========================================= */
+
+.departments-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 28px;
+
+  margin-top: 48px;
+}
+
+
+/* =========================================
+   DEPARTMENT CARD
+   ========================================= */
+
+.department-card {
+  position: relative;
+
+  padding: 32px;
+
+  min-height: 315px;
+
+  background: #ffffff;
+
+  border: 1px solid #e2e8f1;
+
+  border-radius: 20px;
+
+  box-shadow:
+    0 8px 30px rgba(18, 53, 110, 0.06);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.department-card:hover {
+  transform: translateY(-6px);
+
+  border-color: #b8c9e5;
+
+  box-shadow:
+    0 18px 45px rgba(18, 53, 110, 0.12);
+}
+
+
+/* =========================================
+   ICON
+   ========================================= */
+
+.department-icon {
+  width: 62px;
+  height: 62px;
+
+  margin-bottom: 20px;
+
+  border-radius: 15px;
+
+  background: #edf3fc;
+
+  color: #0b3478;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.department-card.available .department-icon {
+  background: #0b3478;
+
+  color: #ffffff;
+}
+
+
+/* =========================================
+   DEPARTMENT CODE
+   ========================================= */
+
+.department-code {
+  margin-bottom: 8px;
+
+  color: #d99d00;
+
+  font-size: 13px;
+
+  font-weight: 800;
+
+  letter-spacing: 1.5px;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================
+   TITLE
+   ========================================= */
+
+.department-card h3 {
+  margin: 0 0 12px;
+
+  color: #122f5f;
+
+  font-size: 22px;
+
+  line-height: 1.3;
+
+  font-weight: 750;
+}
+
+
+/* =========================================
+   DESCRIPTION
+   ========================================= */
+
+.department-card p {
+  margin: 0;
+
+  color: #687891;
+
+  font-size: 15px;
+
+  line-height: 1.7;
+}
+
+
+/* =========================================
+   BUTTON
+   ========================================= */
+
+.department-button {
+  width: fit-content;
+
+  display: inline-flex;
+  align-items: center;
+
+  gap: 8px;
+
+  margin-top: auto;
+  padding-top: 24px;
+
+  color: #0b3478;
+
+  text-decoration: none;
+
+  font-size: 14px;
+
+  font-weight: 750;
+
+  border: none;
+
+  background: transparent;
+
+  cursor: pointer;
+
+  transition: gap 0.2s ease;
+}
+
+.department-button:hover {
+  gap: 12px;
+}
+
+.department-button.disabled {
+  color: #9aa7b9;
+
+  cursor: not-allowed;
+}
+
+.department-button.disabled:hover {
+  gap: 8px;
+}
+
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+@media (max-width: 800px) {
+
+  .departments-hero-content {
+    padding: 60px 25px;
+  }
+
+  .departments-hero h1 {
+    font-size: 50px;
+  }
+
+  .departments-hero p {
+    font-size: 16px;
+  }
+
+  .departments-section {
+    padding: 65px 25px 80px;
+  }
+
+  .departments-heading h2 {
+    font-size: 34px;
+  }
+
+  .departments-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+@media (max-width: 500px) {
+
+  .departments-hero {
+    min-height: 330px;
+  }
+
+  .departments-hero-content {
+    padding: 50px 20px;
+  }
+
+  .departments-hero h1 {
+    font-size: 42px;
+
+    letter-spacing: -1px;
+  }
+
+  .departments-hero p {
+    font-size: 15px;
+  }
+
+  .departments-section {
+    padding: 55px 20px 70px;
+  }
+
+  .departments-heading h2 {
+    font-size: 30px;
+  }
+
+  .department-card {
+    padding: 25px;
+
+    min-height: 300px;
+  }
+
+}

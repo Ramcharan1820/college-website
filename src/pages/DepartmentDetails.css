@@ -1,0 +1,916 @@
+/* =========================================================
+   CSE DEPARTMENT DETAILS
+   Government Polytechnic College, Masab Tank
+   ========================================================= */
+
+.cse-department-page {
+  width: 100%;
+  background: #ffffff;
+  color: #252238;
+}
+
+.cse-department-page .container {
+  width: min(1200px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.cse-hero {
+  position: relative;
+  overflow: hidden;
+
+  padding: 90px 0;
+
+  background:
+    radial-gradient(
+      circle at 85% 20%,
+      rgba(105, 82, 210, 0.18),
+      transparent 32%
+    ),
+    linear-gradient(
+      135deg,
+      #11103a 0%,
+      #29205f 55%,
+      #49359b 100%
+    );
+
+  color: #ffffff;
+}
+
+.cse-hero::before {
+  content: "";
+
+  position: absolute;
+
+  width: 420px;
+  height: 420px;
+
+  right: -150px;
+  top: -160px;
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+}
+
+.cse-hero::after {
+  content: "";
+
+  position: absolute;
+
+  width: 300px;
+  height: 300px;
+
+  right: 30px;
+  bottom: -210px;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+}
+
+.cse-hero-grid {
+  position: relative;
+  z-index: 2;
+
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+
+  align-items: center;
+
+  gap: 70px;
+}
+
+.cse-hero-content {
+  max-width: 720px;
+}
+
+.back-department-link {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 7px;
+
+  margin-bottom: 28px;
+
+  color: rgba(255, 255, 255, 0.78);
+
+  font-size: 13px;
+  font-weight: 600;
+
+  text-decoration: none;
+
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.back-department-link:hover {
+  color: #ffffff;
+  transform: translateX(-3px);
+}
+
+.cse-eyebrow {
+  display: block;
+
+  margin-bottom: 13px;
+
+  color: #c9baff;
+
+  font-size: 12px;
+  font-weight: 800;
+
+  letter-spacing: 2.5px;
+}
+
+.cse-hero h1 {
+  margin: 0;
+
+  font-size: clamp(44px, 6vw, 76px);
+  line-height: 0.98;
+
+  letter-spacing: -2.5px;
+  font-weight: 800;
+}
+
+.cse-hero h1 span {
+  display: block;
+
+  color: #d5caff;
+}
+
+.cse-hero-content > p {
+  max-width: 650px;
+
+  margin: 25px 0 0;
+
+  color: rgba(255, 255, 255, 0.78);
+
+  font-size: 17px;
+  line-height: 1.75;
+}
+
+.cse-hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 9px;
+
+  margin-top: 28px;
+}
+
+.cse-hero-tags span {
+  padding: 8px 13px;
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 100px;
+
+  background: rgba(255, 255, 255, 0.08);
+
+  color: rgba(255, 255, 255, 0.9);
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   HERO VISUAL
+   ========================================================= */
+
+.cse-hero-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 380px;
+}
+
+.cse-visual-circle {
+  width: 310px;
+  height: 310px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.12),
+      rgba(255, 255, 255, 0.03)
+    );
+
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.18);
+
+  text-align: center;
+}
+
+.cse-visual-circle svg {
+  margin-bottom: 15px;
+
+  color: #d8ceff;
+}
+
+.cse-visual-circle strong {
+  font-size: 42px;
+  font-weight: 800;
+
+  letter-spacing: 1px;
+}
+
+.cse-visual-circle span {
+  max-width: 170px;
+
+  margin-top: 5px;
+
+  color: rgba(255, 255, 255, 0.7);
+
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   INTRODUCTION
+   ========================================================= */
+
+.cse-introduction {
+  padding: 90px 0;
+
+  background: #ffffff;
+}
+
+.cse-introduction-grid {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+
+  gap: 80px;
+}
+
+.cse-section-label {
+  display: inline-block;
+
+  margin-bottom: 14px;
+
+  color: #654ac9;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  letter-spacing: 2px;
+}
+
+.cse-introduction h2 {
+  margin: 0;
+
+  max-width: 420px;
+
+  color: #242036;
+
+  font-size: clamp(32px, 4vw, 48px);
+  line-height: 1.1;
+
+  letter-spacing: -1px;
+}
+
+.cse-introduction-grid > div:last-child {
+  padding-top: 4px;
+}
+
+.cse-introduction p {
+  margin: 0 0 18px;
+
+  color: #686375;
+
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.cse-introduction p:last-child {
+  margin-bottom: 0;
+}
+
+
+/* =========================================================
+   COMMON SECTION HEADING
+   ========================================================= */
+
+.cse-section-heading {
+  max-width: 700px;
+
+  margin: 0 auto 48px;
+
+  text-align: center;
+}
+
+.cse-section-heading > span {
+  display: inline-block;
+
+  margin-bottom: 10px;
+
+  color: #654ac9;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  letter-spacing: 2px;
+}
+
+.cse-section-heading h2 {
+  margin: 0;
+
+  color: #242036;
+
+  font-size: clamp(30px, 4vw, 46px);
+  line-height: 1.1;
+
+  letter-spacing: -1px;
+}
+
+.cse-section-heading p {
+  margin: 16px auto 0;
+
+  color: #716d7c;
+
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+
+/* =========================================================
+   VISION & MISSION
+   ========================================================= */
+
+.cse-vision-section {
+  padding: 90px 0;
+
+  background: #f7f5fc;
+}
+
+.vision-mission-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  gap: 24px;
+}
+
+.vision-card,
+.mission-card {
+  min-height: 330px;
+
+  padding: 34px;
+
+  border: 1px solid #e8e3f2;
+  border-radius: 18px;
+
+  background: #ffffff;
+
+  box-shadow: 0 10px 35px rgba(42, 30, 80, 0.05);
+}
+
+.vision-icon {
+  width: 54px;
+  height: 54px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 23px;
+
+  border-radius: 13px;
+
+  background: #eee9ff;
+  color: #6047c6;
+}
+
+.vision-card > span,
+.mission-card > span {
+  display: block;
+
+  margin-bottom: 10px;
+
+  color: #654ac9;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  letter-spacing: 2px;
+}
+
+.vision-card h3 {
+  max-width: 400px;
+
+  margin: 0 0 17px;
+
+  color: #28233b;
+
+  font-size: 26px;
+  line-height: 1.25;
+}
+
+.vision-card p {
+  margin: 0;
+
+  color: #6e6979;
+
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.mission-card ul {
+  display: flex;
+  flex-direction: column;
+
+  gap: 16px;
+
+  margin: 20px 0 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.mission-card li {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 10px;
+
+  color: #625d6e;
+
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.mission-card li svg {
+  flex-shrink: 0;
+
+  margin-top: 2px;
+
+  color: #6a4fd0;
+}
+
+
+/* =========================================================
+   HOD
+   ========================================================= */
+
+.cse-hod-section {
+  padding: 90px 0;
+
+  background: #ffffff;
+}
+
+.hod-card {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+
+  overflow: hidden;
+
+  border: 1px solid #e7e2f0;
+  border-radius: 20px;
+
+  background: #faf9fd;
+
+  box-shadow: 0 12px 40px rgba(42, 30, 80, 0.06);
+}
+
+.hod-photo-placeholder {
+  min-height: 330px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  background: #eeeaff;
+  color: #715bd0;
+}
+
+.hod-photo-placeholder span {
+  font-size: 12px;
+  font-weight: 600;
+
+  color: #756d8d;
+}
+
+.hod-information {
+  padding: 45px;
+}
+
+.hod-label {
+  display: inline-block;
+
+  margin-bottom: 10px;
+
+  color: #654ac9;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  letter-spacing: 2px;
+}
+
+.hod-information h3 {
+  margin: 0;
+
+  color: #29243b;
+
+  font-size: 32px;
+}
+
+.hod-designation {
+  margin: 7px 0 28px;
+
+  color: #716b7e;
+
+  font-size: 15px;
+}
+
+.hod-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  gap: 18px;
+}
+
+.hod-details > div {
+  padding: 18px;
+
+  border: 1px solid #e9e5f1;
+  border-radius: 12px;
+
+  background: #ffffff;
+}
+
+.hod-details strong {
+  display: block;
+
+  margin-bottom: 6px;
+
+  color: #3b354b;
+
+  font-size: 12px;
+}
+
+.hod-details span {
+  color: #777181;
+
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   FACULTY
+   ========================================================= */
+
+.cse-faculty-section {
+  padding: 90px 0;
+
+  background: #f7f5fc;
+}
+
+.faculty-placeholder-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 22px;
+}
+
+.faculty-placeholder-card {
+  padding: 27px;
+
+  border: 1px solid #e6e1ef;
+  border-radius: 17px;
+
+  background: #ffffff;
+
+  text-align: center;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.faculty-placeholder-card:hover {
+  transform: translateY(-5px);
+
+  box-shadow: 0 18px 40px rgba(42, 30, 80, 0.09);
+}
+
+.faculty-placeholder-photo {
+  width: 95px;
+  height: 95px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0 auto 20px;
+
+  border-radius: 50%;
+
+  background: #eee9ff;
+  color: #6a50cb;
+}
+
+.faculty-placeholder-card h3 {
+  margin: 0 0 5px;
+
+  color: #2c273c;
+
+  font-size: 18px;
+}
+
+.faculty-placeholder-card > span {
+  color: #654ac9;
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.faculty-placeholder-card p {
+  min-height: 58px;
+
+  margin: 14px 0 18px;
+
+  color: #777181;
+
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.faculty-placeholder-card button {
+  width: 100%;
+
+  min-height: 40px;
+
+  border: 1px solid #ddd6f3;
+  border-radius: 8px;
+
+  background: #f5f2ff;
+  color: #5f46c5;
+
+  font-family: inherit;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.faculty-placeholder-card button:hover {
+  background: #654ac9;
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   LABORATORIES
+   ========================================================= */
+
+.cse-labs-section {
+  padding: 90px 0;
+
+  background: #ffffff;
+}
+
+.labs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 20px;
+}
+
+.lab-card {
+  padding: 27px;
+
+  border: 1px solid #e7e3ee;
+  border-radius: 16px;
+
+  background: #ffffff;
+
+  box-shadow: 0 7px 25px rgba(42, 30, 80, 0.04);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.lab-card:hover {
+  transform: translateY(-5px);
+
+  border-color: #d8cff4;
+
+  box-shadow: 0 16px 35px rgba(42, 30, 80, 0.08);
+}
+
+.lab-icon {
+  width: 52px;
+  height: 52px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 20px;
+
+  border-radius: 12px;
+
+  background: #eee9ff;
+  color: #624ac7;
+}
+
+.lab-card h3 {
+  margin: 0 0 9px;
+
+  color: #2d283e;
+
+  font-size: 17px;
+}
+
+.lab-card p {
+  margin: 0;
+
+  color: #767080;
+
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 950px) {
+
+  .cse-hero {
+    padding: 70px 0;
+  }
+
+  .cse-hero-grid {
+    grid-template-columns: 1fr;
+
+    gap: 45px;
+  }
+
+  .cse-hero-content {
+    max-width: 800px;
+  }
+
+  .cse-hero-visual {
+    min-height: 280px;
+  }
+
+  .cse-visual-circle {
+    width: 260px;
+    height: 260px;
+  }
+
+  .cse-introduction-grid {
+    grid-template-columns: 1fr;
+
+    gap: 30px;
+  }
+
+  .cse-introduction h2 {
+    max-width: 700px;
+  }
+
+  .faculty-placeholder-grid,
+  .labs-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  .cse-department-page .container {
+    width: calc(100% - 28px);
+  }
+
+  .cse-hero {
+    padding: 55px 0;
+  }
+
+  .cse-hero h1 {
+    font-size: 44px;
+
+    letter-spacing: -1.5px;
+  }
+
+  .cse-hero-content > p {
+    font-size: 15px;
+  }
+
+  .cse-hero-visual {
+    min-height: 240px;
+  }
+
+  .cse-visual-circle {
+    width: 220px;
+    height: 220px;
+  }
+
+  .cse-visual-circle strong {
+    font-size: 34px;
+  }
+
+  .cse-introduction,
+  .cse-vision-section,
+  .cse-hod-section,
+  .cse-faculty-section,
+  .cse-labs-section {
+    padding: 65px 0;
+  }
+
+  .vision-mission-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .vision-card,
+  .mission-card {
+    min-height: auto;
+
+    padding: 26px;
+  }
+
+  .hod-card {
+    grid-template-columns: 1fr;
+  }
+
+  .hod-photo-placeholder {
+    min-height: 250px;
+  }
+
+  .hod-information {
+    padding: 28px;
+  }
+
+  .hod-details {
+    grid-template-columns: 1fr;
+  }
+
+  .faculty-placeholder-grid,
+  .labs-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .faculty-placeholder-card p {
+    min-height: auto;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+  .cse-hero h1 {
+    font-size: 38px;
+  }
+
+  .cse-eyebrow {
+    letter-spacing: 1.8px;
+  }
+
+  .cse-hero-tags {
+    gap: 6px;
+  }
+
+  .cse-hero-tags span {
+    padding: 7px 10px;
+
+    font-size: 11px;
+  }
+
+  .cse-section-heading h2 {
+    font-size: 30px;
+  }
+
+  .vision-card h3 {
+    font-size: 22px;
+  }
+}

@@ -1,0 +1,412 @@
+.placements-page {
+  background: #fff;
+  color: #29283a;
+}
+
+.placements-container {
+  width: min(1150px, calc(100% - 40px));
+  margin: auto;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.placements-hero {
+  padding: 90px 0;
+  color: #fff;
+  background: linear-gradient(135deg, #172554, #4338a8);
+}
+
+.placements-hero span,
+.placements-section-title span,
+.placements-cta span {
+  display: block;
+  margin-bottom: 12px;
+  color: #8f9cff;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.placements-hero span,
+.placements-cta span {
+  color: #c7d2fe;
+}
+
+.placements-hero h1 {
+  max-width: 850px;
+  margin: 0;
+  font-size: clamp(42px, 6vw, 70px);
+  line-height: 1.05;
+  letter-spacing: -2px;
+}
+
+.placements-hero h1 strong {
+  display: block;
+  color: #c7d2fe;
+}
+
+.placements-hero p {
+  max-width: 680px;
+  margin: 25px 0 0;
+  color: #e0e7ff;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+
+/* =========================
+   COMMON SECTIONS
+========================= */
+
+.placements-section,
+.recruiters-section,
+.students-section {
+  padding: 85px 0;
+}
+
+.recruiters-section {
+  background: #f7f8ff;
+}
+
+.students-section {
+  background: #fff;
+}
+
+.placements-section-title {
+  max-width: 760px;
+  margin-bottom: 45px;
+}
+
+.placements-section-title.center {
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+}
+
+.placements-section-title h2 {
+  margin: 0;
+  font-size: clamp(30px, 4vw, 46px);
+  line-height: 1.15;
+}
+
+.placements-section-title p {
+  max-width: 680px;
+  margin: 18px 0 0;
+  color: #716e79;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.placements-section-title.center p {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+
+/* =========================
+   TRAINING & PLACEMENT
+========================= */
+
+.placement-features {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.placement-features article {
+  padding: 27px;
+  border: 1px solid #e4e6ef;
+  border-radius: 16px;
+  background: #fff;
+  transition: .25s ease;
+}
+
+.placement-features article:hover {
+  transform: translateY(-5px);
+  border-color: #b8bff5;
+  box-shadow: 0 15px 35px rgba(67, 56, 168, .08);
+}
+
+.placement-feature-icon {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  background: #eef0ff;
+  color: #4338a8;
+}
+
+.placement-features h3 {
+  margin: 0 0 10px;
+  font-size: 18px;
+}
+
+.placement-features p {
+  margin: 0;
+  color: #77737d;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+
+/* =========================
+   RECRUITERS
+========================= */
+
+.recruiters-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.recruiter-card {
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  padding: 20px;
+  border: 1px solid #e1e4f1;
+  border-radius: 14px;
+  background: #fff;
+  transition: .25s ease;
+}
+
+.recruiter-card:hover {
+  transform: translateY(-4px);
+  border-color: #aeb7f0;
+  box-shadow: 0 12px 30px rgba(67, 56, 168, .08);
+}
+
+.recruiter-logo {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #eef0ff;
+  color: #4338a8;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.recruiter-card span {
+  color: #3d3b46;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+}
+
+
+/* =========================
+   SELECTED STUDENTS
+========================= */
+
+.students-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+}
+
+.student-placement-card {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  overflow: hidden;
+  border: 1px solid #e4e5eb;
+  border-radius: 17px;
+  background: #fff;
+  transition: .25s ease;
+}
+
+.student-placement-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 35px rgba(30, 30, 60, .08);
+}
+
+.student-photo {
+  min-height: 210px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #eef0ff;
+  color: #6b63bd;
+}
+
+.student-info {
+  padding: 25px;
+}
+
+.student-label {
+  color: #4338a8;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.student-info h3 {
+  margin: 8px 0 7px;
+  font-size: 22px;
+}
+
+.student-info p {
+  margin: 0 0 18px;
+  color: #77737d;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.student-company {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #44414c;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.student-company svg {
+  color: #4338a8;
+}
+
+.student-package {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 7px 10px;
+  border-radius: 7px;
+  background: #eef0ff;
+  color: #4338a8;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+
+/* =========================
+   CTA
+========================= */
+
+.placements-cta {
+  padding: 65px 0;
+  color: #fff;
+  background: linear-gradient(135deg, #172554, #4338a8);
+}
+
+.placements-cta .placements-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 35px;
+}
+
+.placements-cta h2 {
+  max-width: 650px;
+  margin: 0;
+  font-size: clamp(28px, 4vw, 42px);
+  line-height: 1.15;
+}
+
+.placements-cta a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  padding: 14px 20px;
+  border-radius: 9px;
+  background: #fff;
+  color: #4338a8;
+  font-size: 13px;
+  font-weight: 800;
+  text-decoration: none;
+  transition: .2s ease;
+}
+
+.placements-cta a:hover {
+  transform: translateY(-2px);
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 1000px) {
+  .placement-features {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .recruiters-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+  .placements-container {
+    width: calc(100% - 28px);
+  }
+
+  .placements-hero {
+    padding: 65px 0;
+  }
+
+  .placements-hero h1 {
+    font-size: 42px;
+  }
+
+  .placements-section,
+  .recruiters-section,
+  .students-section {
+    padding: 60px 0;
+  }
+
+  .placement-features,
+  .recruiters-grid,
+  .students-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .student-placement-card {
+    grid-template-columns: 1fr;
+  }
+
+  .student-photo {
+    min-height: 180px;
+  }
+
+  .placements-cta .placements-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .placements-cta {
+    padding: 55px 0;
+  }
+}
+
+
+/* SMALL MOBILE */
+
+@media (max-width: 420px) {
+  .placements-hero h1 {
+    font-size: 36px;
+  }
+
+  .placement-features article,
+  .student-info {
+    padding: 22px;
+  }
+
+  .recruiter-card {
+    min-height: 105px;
+  }
+}

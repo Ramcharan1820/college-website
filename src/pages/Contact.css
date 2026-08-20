@@ -1,0 +1,647 @@
+/* =================================
+   CONTACT PAGE
+================================= */
+
+.contact-page {
+  width: 100%;
+  background: #f7f8fa;
+  color: #242424;
+}
+
+
+/* =================================
+   HERO
+================================= */
+
+.contact-hero {
+  position: relative;
+  overflow: hidden;
+
+  min-height: 390px;
+
+  display: flex;
+  align-items: center;
+
+  background:
+    linear-gradient(
+      135deg,
+      #8f1717 0%,
+      #a91f1f 55%,
+      #c23a2b 100%
+    );
+
+  color: #ffffff;
+}
+
+.contact-hero::before {
+  content: "";
+
+  position: absolute;
+
+  width: 500px;
+  height: 500px;
+
+  right: -180px;
+  top: -230px;
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  border-radius: 50%;
+}
+
+.contact-hero::after {
+  content: "";
+
+  position: absolute;
+
+  width: 300px;
+  height: 300px;
+
+  right: 60px;
+  bottom: -220px;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  border-radius: 50%;
+}
+
+.contact-hero-content {
+  position: relative;
+
+  z-index: 2;
+
+  width: min(1100px, calc(100% - 40px));
+
+  margin: auto;
+
+  padding: 80px 0;
+}
+
+.contact-label {
+  display: inline-block;
+
+  margin-bottom: 16px;
+
+  color: #ffd166;
+
+  font-size: 12px;
+  font-weight: 800;
+
+  letter-spacing: 2px;
+}
+
+.contact-hero h1 {
+  margin: 0;
+
+  font-size: clamp(44px, 6vw, 70px);
+
+  line-height: 1.05;
+
+  letter-spacing: -1.5px;
+}
+
+.contact-hero p {
+  max-width: 680px;
+
+  margin: 20px 0 0;
+
+  color: #fff1e9;
+
+  font-size: 16px;
+
+  line-height: 1.8;
+}
+
+
+/* =================================
+   CONTACT SECTION
+================================= */
+
+.contact-section {
+  padding: 85px 20px;
+
+  background: #ffffff;
+}
+
+.contact-container {
+  width: min(1100px, 100%);
+
+  margin: auto;
+}
+
+.contact-heading {
+  max-width: 720px;
+
+  margin-bottom: 42px;
+}
+
+.contact-heading > span {
+  display: inline-block;
+
+  margin-bottom: 10px;
+
+  color: #a51d1d;
+
+  font-size: 12px;
+
+  font-weight: 800;
+
+  letter-spacing: 1.8px;
+}
+
+.contact-heading h2 {
+  margin: 0 0 12px;
+
+  color: #292929;
+
+  font-size: 38px;
+
+  line-height: 1.2;
+}
+
+.contact-heading p {
+  margin: 0;
+
+  color: #707070;
+
+  font-size: 14px;
+
+  line-height: 1.8;
+}
+
+
+/* =================================
+   CONTACT CARDS
+================================= */
+
+.contact-grid {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 18px;
+}
+
+.contact-card {
+  min-height: 215px;
+
+  padding: 25px;
+
+  background: #ffffff;
+
+  border: 1px solid #e5e5e5;
+
+  border-radius: 16px;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.contact-card:hover {
+  transform: translateY(-6px);
+
+  border-color: #e0a6a6;
+
+  box-shadow:
+    0 15px 35px rgba(120, 20, 20, 0.09);
+}
+
+.contact-card-icon {
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 20px;
+
+  border-radius: 12px;
+
+  background: #fff0ed;
+
+  color: #a51d1d;
+}
+
+.contact-card h3 {
+  margin: 0 0 9px;
+
+  color: #292929;
+
+  font-size: 16px;
+}
+
+.contact-card p {
+  margin: 0;
+
+  color: #737373;
+
+  font-size: 13px;
+
+  line-height: 1.7;
+}
+
+
+/* =================================
+   LOCATION SECTION
+================================= */
+
+.contact-location {
+  padding: 80px 20px;
+
+  background: #f7f7f7;
+}
+
+
+/* LOCATION HEADER */
+
+.location-header {
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: space-between;
+
+  gap: 30px;
+
+  margin-bottom: 30px;
+}
+
+.location-header span {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  margin-bottom: 8px;
+
+  color: #a51d1d;
+
+  font-size: 12px;
+
+  font-weight: 800;
+
+  letter-spacing: 1.5px;
+}
+
+.location-header h2 {
+  margin: 0 0 7px;
+
+  color: #292929;
+
+  font-size: 28px;
+
+  line-height: 1.25;
+}
+
+.location-header p {
+  margin: 0;
+
+  color: #737373;
+
+  font-size: 13px;
+}
+
+
+/* GOOGLE MAP BUTTON */
+
+.map-button {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  padding: 11px 15px;
+
+  border: 1px solid #c63b3b;
+
+  border-radius: 8px;
+
+  background: #ffffff;
+
+  color: #a51d1d;
+
+  font-size: 12px;
+
+  font-weight: 800;
+
+  text-decoration: none;
+
+  white-space: nowrap;
+
+  transition: 0.2s ease;
+}
+
+.map-button:hover {
+  background: #a51d1d;
+
+  color: #ffffff;
+}
+
+
+/* =================================
+   LOCATION LAYOUT
+================================= */
+
+.location-layout {
+  display: grid;
+
+  grid-template-columns: 1.25fr 0.85fr;
+
+  gap: 28px;
+
+  align-items: start;
+}
+
+
+/* =================================
+   MAP
+================================= */
+
+.map-wrapper {
+  width: 100%;
+
+  height: 550px;
+
+  overflow: hidden;
+
+  border-radius: 18px;
+
+  background: #e8e8e8;
+
+  border: 1px solid #dedede;
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.map-wrapper iframe {
+  width: 100%;
+
+  height: 100%;
+
+  display: block;
+
+  border: 0;
+}
+
+
+/* =================================
+   HOW TO REACH
+================================= */
+
+.reach-section {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 16px;
+}
+
+.reach-section > h2 {
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  margin: 0 0 3px;
+
+  color: #292929;
+
+  font-size: 24px;
+}
+
+
+/* REACH CARD */
+
+.reach-card {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 16px;
+
+  padding: 20px;
+
+  background: #ffffff;
+
+  border: 1px solid #e4e4e4;
+
+  border-left: 4px solid #a51d1d;
+
+  border-radius: 14px;
+
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.05);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.reach-card:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 12px 25px rgba(0, 0, 0, 0.08);
+}
+
+
+/* REACH ICON */
+
+.reach-icon {
+  width: 46px;
+  height: 46px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 11px;
+}
+
+
+/* ROAD */
+
+.reach-icon.road {
+  background: #fde8e8;
+
+  color: #a51d1d;
+}
+
+
+/* TRAIN */
+
+.reach-icon.train {
+  background: #e8efff;
+
+  color: #315db5;
+}
+
+
+/* AIR */
+
+.reach-icon.air {
+  background: #e2f7ee;
+
+  color: #17734f;
+}
+
+
+/* LANDMARK */
+
+.reach-icon.landmark {
+  background: #fff2d8;
+
+  color: #b47700;
+}
+
+
+/* TEXT */
+
+.reach-card h3 {
+  margin: 1px 0 7px;
+
+  color: #343434;
+
+  font-size: 15px;
+}
+
+.reach-card p {
+  margin: 0;
+
+  color: #737373;
+
+  font-size: 13px;
+
+  line-height: 1.7;
+}
+
+
+/* =================================
+   TABLET
+================================= */
+
+@media (max-width: 950px) {
+
+  .contact-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .location-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .map-wrapper {
+    height: 450px;
+  }
+
+}
+
+
+/* =================================
+   MOBILE
+================================= */
+
+@media (max-width: 650px) {
+
+  .contact-hero {
+    min-height: 350px;
+  }
+
+  .contact-hero-content {
+    padding: 65px 0;
+  }
+
+  .contact-hero h1 {
+    font-size: 44px;
+  }
+
+  .contact-hero p {
+    font-size: 14px;
+  }
+
+  .contact-section {
+    padding: 60px 20px;
+  }
+
+  .contact-heading h2 {
+    font-size: 30px;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-card {
+    min-height: auto;
+  }
+
+  .contact-location {
+    padding: 60px 20px;
+  }
+
+  .location-header {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 18px;
+  }
+
+  .location-header h2 {
+    font-size: 23px;
+  }
+
+  .map-button {
+    width: 100%;
+
+    justify-content: center;
+
+    box-sizing: border-box;
+  }
+
+  .map-wrapper {
+    height: 380px;
+  }
+
+  .reach-card {
+    padding: 18px;
+  }
+
+}
+
+
+/* =================================
+   SMALL MOBILE
+================================= */
+
+@media (max-width: 420px) {
+
+  .contact-hero h1 {
+    font-size: 38px;
+  }
+
+  .map-wrapper {
+    height: 320px;
+  }
+
+  .reach-card {
+    gap: 12px;
+  }
+
+  .reach-icon {
+    width: 42px;
+    height: 42px;
+  }
+
+}

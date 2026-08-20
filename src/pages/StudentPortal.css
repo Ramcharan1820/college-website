@@ -1,0 +1,130 @@
+.student-portal-page {
+  background: #f6f7fb;
+  color: #202033;
+}
+
+.student-portal-container {
+  width: min(1100px, calc(100% - 40px));
+  margin: auto;
+}
+
+.student-portal-hero {
+  padding: 75px 20px;
+  background: #0d2d68;
+  color: white;
+}
+
+.student-portal-hero span,
+.student-portal-heading span {
+  color: #ffbd22;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.student-portal-hero h1 {
+  margin: 12px 0;
+  font-size: clamp(40px, 6vw, 58px);
+}
+
+.student-portal-hero p {
+  max-width: 650px;
+  margin: 0;
+  color: #dbe5ff;
+  line-height: 1.8;
+}
+
+.student-portal-section {
+  padding: 70px 0 90px;
+}
+
+.student-portal-heading {
+  margin-bottom: 35px;
+}
+
+.student-portal-heading h2 {
+  margin: 8px 0;
+  font-size: 30px;
+}
+
+.student-portal-heading p {
+  margin: 0;
+  color: #747887;
+  font-size: 14px;
+}
+
+.student-portal-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.student-service-card {
+  display: block;
+  padding: 28px;
+  background: white;
+  border: 1px solid #e2e4ec;
+  border-radius: 16px;
+  color: #202033;
+  text-decoration: none;
+  transition: .25s ease;
+}
+
+.student-service-card:hover {
+  transform: translateY(-5px);
+  border-color: #c8c0ff;
+  box-shadow: 0 15px 35px rgba(30, 35, 80, .09);
+}
+
+.student-service-icon {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 22px;
+  border-radius: 12px;
+  background: #eeeaff;
+  color: #604bd4;
+}
+
+.student-service-content h3 {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+
+.student-service-content p {
+  margin: 0 0 20px;
+  color: #747887;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.student-service-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #604bd4;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+@media (max-width: 800px) {
+  .student-portal-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .student-portal-container {
+    width: calc(100% - 30px);
+  }
+
+  .student-portal-hero {
+    padding: 60px 0;
+  }
+
+  .student-portal-section {
+    padding: 50px 0 65px;
+  }
+}
