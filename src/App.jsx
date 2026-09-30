@@ -1,6 +1,14 @@
 import React, { useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 
+// Attendance Page
+import Attendance from "./pages/Attendance";
+
+// Result Pages
+import Result from "./pages/Result";
+import MidResult from "./pages/MidResult";
+import SemesterResult from "./pages/SemesterResult";
+
 // Main Pages
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -27,42 +35,166 @@ import Footer from "./components/Footer";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
+
   return null;
 }
 
 export default function App() {
   return (
     <div className="app">
+
       <Header />
+
       <ScrollToTop />
+
       <Routes>
-        {/* Main Routes */}
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/departments" element={<Departments />} />
-        <Route path="/faculty" element={<Faculty />} />
-        <Route path="/placements" element={<Placements />} />
-        <Route path="/events" element={<Events />} />
-        <Route path="/gallery" element={<Gallery />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/student-portal" element={<StudentPortal />} />
 
-        {/* Department Routes */}
-        <Route path="/departments/cse" element={<CSE />} />
-        <Route path="/departments/ece" element={<ECE />} />
-        <Route path="/departments/eee" element={<EEE />} />
-        <Route path="/departments/mechanical" element={<Mechanical />} />
-        <Route path="/departments/civil" element={<Civil />} />
-        <Route path="/departments/automobile" element={<Automobile />} />
-        <Route path="/departments/pharmacy" element={<Pharmacy />} />
+        {/* =========================
+            MAIN ROUTES
+        ========================== */}
 
-        {/* Fallback Route */}
-        <Route path="*" element={<Home />} />
+        <Route
+          path="/"
+          element={<Home />}
+        />
+
+        <Route
+          path="/about"
+          element={<About />}
+        />
+
+        <Route
+          path="/departments"
+          element={<Departments />}
+        />
+
+        <Route
+          path="/faculty"
+          element={<Faculty />}
+        />
+
+        <Route
+          path="/placements"
+          element={<Placements />}
+        />
+
+        <Route
+          path="/events"
+          element={<Events />}
+        />
+
+        <Route
+          path="/gallery"
+          element={<Gallery />}
+        />
+
+        <Route
+          path="/contact"
+          element={<Contact />}
+        />
+
+        {/* =========================
+            STUDENT PORTAL
+        ========================== */}
+
+        <Route
+          path="/student-portal"
+          element={<StudentPortal />}
+        />
+
+        {/* =========================
+            ATTENDANCE
+        ========================== */}
+
+        <Route
+          path="/student-portal/attendance"
+          element={<Attendance />}
+        />
+
+        {/* =========================
+            RESULT
+        ========================== */}
+
+        <Route
+          path="/student-portal/result"
+          element={<Result />}
+        />
+
+        {/* =========================
+            MID RESULT
+        ========================== */}
+
+        <Route
+          path="/student-portal/result/mid"
+          element={<MidResult />}
+        />
+
+        {/* =========================
+            SEMESTER RESULT
+        ========================== */}
+
+        <Route
+          path="/student-portal/result/semester"
+          element={<SemesterResult />}
+        />
+
+        {/* =========================
+            DEPARTMENT ROUTES
+        ========================== */}
+
+        <Route
+          path="/departments/cse"
+          element={<CSE />}
+        />
+
+        <Route
+          path="/departments/ece"
+          element={<ECE />}
+        />
+
+        <Route
+          path="/departments/eee"
+          element={<EEE />}
+        />
+
+        <Route
+          path="/departments/mechanical"
+          element={<Mechanical />}
+        />
+
+        <Route
+          path="/departments/civil"
+          element={<Civil />}
+        />
+
+        <Route
+          path="/departments/automobile"
+          element={<Automobile />}
+        />
+
+        <Route
+          path="/departments/pharmacy"
+          element={<Pharmacy />}
+        />
+
+        {/* =========================
+            FALLBACK ROUTE
+            MUST BE LAST
+        ========================== */}
+
+        <Route
+          path="*"
+          element={<Home />}
+        />
+
       </Routes>
+
       <Footer />
+
     </div>
   );
 }

@@ -1,0 +1,327 @@
+.mid-result-card {
+  background: white;
+
+  border: 1px solid #e4eaf2;
+
+  border-radius: 18px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 10px 30px
+      rgba(
+        20,
+        47,
+        82,
+        0.08
+      );
+}
+
+/* HEADER */
+
+.mid-result-header {
+  padding: 25px 28px;
+
+  background: #f8fbff;
+
+  border-bottom:
+    1px solid #e4eaf2;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 20px;
+}
+
+.mid-result-label {
+  font-size: 11px;
+
+  font-weight: 800;
+
+  letter-spacing: 1px;
+
+  color: #2774c8;
+}
+
+.mid-result-header h2 {
+  margin: 5px 0;
+
+  font-size: 25px;
+
+  color: #14253d;
+}
+
+.mid-result-header p {
+  margin: 0;
+
+  font-size: 13px;
+
+  color: #718096;
+}
+
+.mid-result-badge {
+  padding:
+    8px 13px;
+
+  border-radius: 20px;
+
+  background: #eaf3ff;
+
+  color: #1256a0;
+
+  font-size: 12px;
+
+  font-weight: 800;
+}
+
+/* STUDENT DETAILS */
+
+.mid-student-details {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  gap: 1px;
+
+  background: #e5eaf1;
+
+  border-bottom:
+    1px solid #e5eaf1;
+}
+
+.mid-student-details > div {
+  background: white;
+
+  padding:
+    17px 20px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 5px;
+}
+
+.mid-student-details span {
+  font-size: 11px;
+
+  color: #7a8798;
+
+  font-weight: 600;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.4px;
+}
+
+.mid-student-details strong {
+  font-size: 13px;
+
+  color: #25364f;
+
+  line-height: 1.4;
+}
+
+/* TABLE */
+
+.mid-table-wrapper {
+  overflow-x: auto;
+}
+
+.mid-result-table {
+  width: 100%;
+
+  border-collapse:
+    collapse;
+
+  min-width: 650px;
+}
+
+.mid-result-table th {
+  padding:
+    13px 15px;
+
+  background: #f7f9fc;
+
+  color: #526174;
+
+  font-size: 11px;
+
+  text-transform:
+    uppercase;
+
+  letter-spacing:
+    0.5px;
+
+  text-align: left;
+
+  border-bottom:
+    1px solid #e3e8ef;
+}
+
+.mid-result-table td {
+  padding:
+    14px 15px;
+
+  font-size: 13px;
+
+  color: #34445b;
+
+  border-bottom:
+    1px solid #edf0f4;
+}
+
+.mid-result-table tbody tr:hover {
+  background: #fafcff;
+}
+
+.mid-subject-name {
+  font-weight: 600;
+
+  color: #263850 !important;
+}
+
+.mid-marks {
+  font-weight: 800;
+
+  color: #1256a0 !important;
+
+  text-align: center;
+}
+
+.mid-result-table th:last-child,
+.mid-result-table td:last-child {
+  text-align: center;
+}
+
+.mid-empty {
+  text-align: center;
+
+  padding: 30px !important;
+
+  color: #7a8798 !important;
+}
+
+/* TOTAL */
+
+.mid-result-table tfoot td {
+  background: #f8fbff;
+
+  border-bottom: none;
+
+  font-weight: 800;
+}
+
+.mid-total-label {
+  text-align: right;
+
+  color: #33445a !important;
+}
+
+.mid-total-value {
+  color: #1256a0 !important;
+
+  font-size: 15px !important;
+}
+
+/* SUMMARY */
+
+.mid-summary {
+  padding: 24px 28px;
+
+  border-top:
+    1px solid #e6ebf2;
+}
+
+.mid-summary-title {
+  font-size: 17px;
+
+  font-weight: 800;
+
+  color: #162840;
+
+  margin-bottom: 15px;
+}
+
+.mid-summary-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, 1fr);
+
+  gap: 14px;
+}
+
+.mid-summary-item {
+  padding:
+    17px 18px;
+
+  background: #f8fafc;
+
+  border:
+    1px solid #e6ebf1;
+
+  border-radius: 10px;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+}
+
+.mid-summary-item span {
+  color: #6d7b8e;
+
+  font-size: 12px;
+}
+
+.mid-summary-item strong {
+  color: #17365f;
+
+  font-size: 18px;
+}
+
+/* MOBILE */
+
+@media (max-width: 800px) {
+  .mid-student-details {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 550px) {
+  .mid-result-header {
+    padding: 20px;
+
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .mid-result-header h2 {
+    font-size: 21px;
+  }
+
+  .mid-student-details {
+    grid-template-columns: 1fr;
+  }
+
+  .mid-student-details > div {
+    padding:
+      13px 17px;
+  }
+
+  .mid-summary {
+    padding: 20px 17px;
+  }
+
+  .mid-summary-grid {
+    grid-template-columns: 1fr;
+  }
+}
