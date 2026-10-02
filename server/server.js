@@ -2,7 +2,9 @@ const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
 
-dotenv.config();
+if (require.main === module) {
+  dotenv.config();
+}
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -936,12 +938,16 @@ app.use((req, res) => {
    START SERVER
 ===================================================== */
 
-app.listen(
-  PORT,
-  "0.0.0.0",
-  () => {
-    console.log(
-      `Server running on http://localhost:${PORT}`
-    );
-  }
-);
+if (require.main === module) {
+  app.listen(
+    PORT,
+    "0.0.0.0",
+    () => {
+      console.log(
+        `Server running on http://localhost:${PORT}`
+      );
+    }
+  );
+}
+
+module.exports = app;
