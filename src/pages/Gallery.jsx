@@ -12,7 +12,7 @@ const galleryItems = [
   {
     title: "College Campus",
     category: "Campus",
-    image: "/images/gallery/campus.jpg",
+    image: "/college-campus-1.jpg",
   },
   {
     title: "Computer Science Laboratory",
