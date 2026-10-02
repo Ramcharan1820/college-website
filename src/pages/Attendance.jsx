@@ -1,7 +1,10 @@
 import React, { useMemo, useState } from "react";
 import "./Attendance.css";
 
-const API_URL = `${import.meta.env.VITE_API_BASE_URL}/api/attendance`;
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL?.replace(/\/+$/, "");
+const API_URL = API_BASE_URL
+  ? `${API_BASE_URL}/api/attendance`
+  : null;
 
 function Attendance() {
   const [pin, setPin] = useState("");
@@ -26,6 +29,12 @@ function Attendance() {
     setError("");
 
     try {
+      if (!API_URL) {
+        throw new Error(
+          "VITE_API_BASE_URL is missing from this frontend build. Configure it in the frontend deployment settings and redeploy."
+        );
+      }
+
       const response = await fetch(
         `${API_URL}?pin=${encodeURIComponent(enteredPin)}`
       );
@@ -35,7 +44,9 @@ function Attendance() {
       try {
         result = await response.json();
       } catch {
-        throw new Error("Invalid response from server.");
+        throw new Error(
+          `Attendance API returned a non-JSON response (HTTP ${response.status}). Check VITE_API_BASE_URL in the frontend deployment settings and redeploy.`
+        );
       }
 
       if (!response.ok || !result?.success || !result?.data) {
@@ -51,7 +62,8 @@ function Attendance() {
 
       setAttendance(null);
       setError(
-        "We couldn't retrieve attendance from SBTET right now."
+        err.message ||
+          "We couldn't retrieve attendance from SBTET right now."
       );
     } finally {
       setLoading(false);
