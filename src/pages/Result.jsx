@@ -9,58 +9,53 @@ function Result() {
   const [semester, setSemester] = useState("5SEM");
   const [examType, setExamType] = useState("Mid-1");
 
-  const [examMonthYear, setExamMonthYear] =
-    useState("APR-2026");
-
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
   const [error, setError] = useState("");
 
-  const handleExamTypeChange = (value) => {
-    setExamType(value);
+  const schemes = [
+    "C26",
+    "C24",
+    "ER2020",
+    "C21",
+    "C09",
+    "C08",
+    "C05",
+    "C18",
+    "C16S",
+    "C16",
+    "ER91",
+    "C14",
+  ];
+
+  const semesters = [
+    "1SEM",
+    "2SEM",
+    "3SEM",
+    "4SEM",
+    "5SEM",
+    "6SEM",
+  ];
+
+  const examTypes = [
+    "Mid-1",
+    "Mid-2",
+    "Semester",
+  ];
+
+  const clearResult = () => {
     setResult(null);
     setError("");
-  };
-
-  const handleSemesterChange = (value) => {
-    setSemester(value);
-    setResult(null);
-    setError("");
-
-    /*
-      Currently verified:
-      5SEM -> APR-2026
-    */
-
-    if (value === "5SEM") {
-      setExamMonthYear("APR-2026");
-    } else {
-      setExamMonthYear("");
-    }
   };
 
   const handleViewResult = async (e) => {
     e.preventDefault();
 
-    setError("");
     setResult(null);
+    setError("");
 
     if (!pin.trim()) {
       setError("Please enter your PIN.");
-      return;
-    }
-
-    /*
-      Exam Month & Year is required ONLY
-      when Semester is selected.
-    */
-    if (
-      examType === "Semester" &&
-      !examMonthYear
-    ) {
-      setError(
-        "Please select the Exam Month & Year for the Semester result."
-      );
       return;
     }
 
@@ -79,23 +74,13 @@ function Result() {
       params.append("examType", examType);
 
       /*
-        VERY IMPORTANT:
-
-        Do NOT send examMonthYear for Mid-1
-        or Mid-2.
-
-        Send it ONLY for Semester.
+        SECURITY:
+        Do not print the complete query string here
+        because it contains the student's PIN.
       */
-      if (examType === "Semester") {
-        params.append(
-          "examMonthYear",
-          examMonthYear
-        );
-      }
 
       console.log(
-        "Result request:",
-        params.toString()
+        `Requesting ${examType} result for ${semester}`
       );
 
       const response = await fetch(
@@ -103,6 +88,14 @@ function Result() {
       );
 
       const data = await response.json();
+
+      console.log(
+        "Result response received:",
+        {
+          success: data?.success,
+          message: data?.message || null,
+        }
+      );
 
       if (!response.ok || !data.success) {
         throw new Error(
@@ -112,13 +105,18 @@ function Result() {
       }
 
       setResult(data);
+
     } catch (err) {
-      console.error("Result error:", err);
+      console.error(
+        "Result error:",
+        err.message
+      );
 
       setError(
         err.message ||
           "Unable to fetch result."
       );
+
     } finally {
       setLoading(false);
     }
@@ -127,15 +125,21 @@ function Result() {
   return (
     <div className="result-page">
 
-      {/* HERO */}
+      {/* =================================================
+          HERO
+      ================================================= */}
+
       <section className="result-hero">
+
         <div className="result-hero-content">
 
           <span className="result-badge">
             STUDENT PORTAL
           </span>
 
-          <h1>Student Result</h1>
+          <h1>
+            Student Result
+          </h1>
 
           <p>
             View your examination result directly
@@ -143,9 +147,14 @@ function Result() {
           </p>
 
         </div>
+
       </section>
 
-      {/* SEARCH */}
+
+      {/* =================================================
+          SEARCH
+      ================================================= */}
+
       <section className="result-container">
 
         <div className="result-search-card">
@@ -157,21 +166,31 @@ function Result() {
             </div>
 
             <div>
-              <h2>Check Result</h2>
+
+              <h2>
+                Check Result
+              </h2>
 
               <p>
                 Enter your details to view your
                 result.
               </p>
+
             </div>
 
           </div>
 
-          <form onSubmit={handleViewResult}>
+
+          <form
+            onSubmit={handleViewResult}
+          >
 
             <div className="result-form-grid">
 
-              {/* PIN */}
+              {/* =================================================
+                  PIN
+              ================================================= */}
+
               <div className="form-group">
 
                 <label htmlFor="pin">
@@ -183,15 +202,21 @@ function Result() {
                   type="text"
                   placeholder="Example: 24001-CS-127"
                   value={pin}
-                  onChange={(e) =>
-                    setPin(e.target.value)
-                  }
+                  onChange={(e) => {
+                    setPin(e.target.value);
+                    clearResult();
+                  }}
                   autoComplete="off"
+                  spellCheck="false"
                 />
 
               </div>
 
-              {/* SCHEME */}
+
+              {/* =================================================
+                  SCHEME
+              ================================================= */}
+
               <div className="form-group">
 
                 <label htmlFor="scheme">
@@ -203,30 +228,30 @@ function Result() {
                   value={scheme}
                   onChange={(e) => {
                     setScheme(e.target.value);
-                    setResult(null);
-                    setError("");
+                    clearResult();
                   }}
                 >
-                  <option value="C24">
-                    C24
-                  </option>
 
-                  <option value="C26">
-                    C26
-                  </option>
+                  {schemes.map(
+                    (item) => (
+                      <option
+                        key={item}
+                        value={item}
+                      >
+                        {item}
+                      </option>
+                    )
+                  )}
 
-                  <option value="C18">
-                    C18
-                  </option>
-
-                  <option value="C16">
-                    C16
-                  </option>
                 </select>
 
               </div>
 
-              {/* SEMESTER */}
+
+              {/* =================================================
+                  SEMESTER
+              ================================================= */}
+
               <div className="form-group">
 
                 <label htmlFor="semester">
@@ -236,40 +261,32 @@ function Result() {
                 <select
                   id="semester"
                   value={semester}
-                  onChange={(e) =>
-                    handleSemesterChange(
-                      e.target.value
-                    )
-                  }
+                  onChange={(e) => {
+                    setSemester(e.target.value);
+                    clearResult();
+                  }}
                 >
-                  <option value="1SEM">
-                    1SEM
-                  </option>
 
-                  <option value="2SEM">
-                    2SEM
-                  </option>
+                  {semesters.map(
+                    (item) => (
+                      <option
+                        key={item}
+                        value={item}
+                      >
+                        {item}
+                      </option>
+                    )
+                  )}
 
-                  <option value="3SEM">
-                    3SEM
-                  </option>
-
-                  <option value="4SEM">
-                    4SEM
-                  </option>
-
-                  <option value="5SEM">
-                    5SEM
-                  </option>
-
-                  <option value="6SEM">
-                    6SEM
-                  </option>
                 </select>
 
               </div>
 
-              {/* EXAM TYPE */}
+
+              {/* =================================================
+                  EXAM TYPE
+              ================================================= */}
+
               <div className="form-group">
 
                 <label htmlFor="examType">
@@ -279,77 +296,33 @@ function Result() {
                 <select
                   id="examType"
                   value={examType}
-                  onChange={(e) =>
-                    handleExamTypeChange(
-                      e.target.value
-                    )
-                  }
+                  onChange={(e) => {
+                    setExamType(e.target.value);
+                    clearResult();
+                  }}
                 >
-                  <option value="Mid-1">
-                    Mid-1
-                  </option>
 
-                  <option value="Mid-2">
-                    Mid-2
-                  </option>
+                  {examTypes.map(
+                    (item) => (
+                      <option
+                        key={item}
+                        value={item}
+                      >
+                        {item}
+                      </option>
+                    )
+                  )}
 
-                  <option value="Semester">
-                    Semester
-                  </option>
                 </select>
 
               </div>
 
-              {/* ONLY FOR SEMESTER */}
-              {examType === "Semester" && (
-                <div className="form-group semester-only-field">
-
-                  <label htmlFor="examMonthYear">
-                    Exam Month & Year
-                  </label>
-
-                  {semester === "5SEM" ? (
-                    <select
-                      id="examMonthYear"
-                      value={examMonthYear}
-                      onChange={(e) => {
-                        setExamMonthYear(
-                          e.target.value
-                        );
-
-                        setResult(null);
-                        setError("");
-                      }}
-                    >
-                      <option value="APR-2026">
-                        APR-2026
-                      </option>
-                    </select>
-                  ) : (
-                    <select
-                      id="examMonthYear"
-                      value=""
-                      onChange={(e) =>
-                        setExamMonthYear(
-                          e.target.value
-                        )
-                      }
-                    >
-                      <option value="">
-                        No verified exam month/year
-                      </option>
-                    </select>
-                  )}
-
-                  <small>
-                    Required by SBTET only for
-                    Semester results.
-                  </small>
-
-                </div>
-              )}
-
             </div>
+
+
+            {/* =================================================
+                VIEW RESULT BUTTON
+            ================================================= */}
 
             <button
               type="submit"
@@ -379,6 +352,11 @@ function Result() {
 
           </form>
 
+
+          {/* =================================================
+              ERROR
+          ================================================= */}
+
           {error && (
             <div className="result-error">
 
@@ -395,7 +373,11 @@ function Result() {
 
         </div>
 
-        {/* RESULT OUTPUT */}
+
+        {/* =================================================
+            RESULT OUTPUT
+        ================================================= */}
+
         {result && (
           <div className="result-output">
 

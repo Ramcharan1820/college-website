@@ -11,7 +11,7 @@ function Footer() {
 
         {/* COLLEGE */}
         <div className="footer-about">
-          <div className="footer-logo">GPC</div>
+          <div className="footer-logo">GPT</div>
 
           <h3>Government Polytechnic College</h3>
 

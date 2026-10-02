@@ -35,7 +35,6 @@ const SEMESTER_RESULT_API =
 function parseSBTETResponse(text) {
   let data = JSON.parse(text);
 
-  // SBTET sometimes returns JSON inside a string
   if (typeof data === "string") {
     data = JSON.parse(data);
   }
@@ -51,7 +50,7 @@ function sbtetHeaders() {
   };
 }
 
-async function fetchSBTET(url) {
+async function fetchSBTET(url, type = "SBTET") {
   const controller = new AbortController();
 
   const timeout = setTimeout(() => {
@@ -59,13 +58,22 @@ async function fetchSBTET(url) {
   }, 15000);
 
   try {
+    console.log("");
+    console.log("=================================================");
+    console.log(`REQUESTING ${type}`);
+    console.log("=================================================");
+
     const response = await fetch(url, {
       method: "GET",
       headers: sbtetHeaders(),
       signal: controller.signal,
     });
 
+    console.log(`SBTET HTTP STATUS: ${response.status}`);
+
     const text = await response.text();
+
+    console.log(`SBTET RESPONSE LENGTH: ${text.length}`);
 
     return {
       response,
@@ -107,14 +115,18 @@ app.get("/api/attendance", async (req, res) => {
     const url =
       `${ATTENDANCE_API}?pin=${encodeURIComponent(pin)}`;
 
-    console.log(`Attendance request: ${pin}`);
+    console.log(`Attendance request for PIN: ${pin}`);
 
-    const { response, text } = await fetchSBTET(url);
+    const {
+      response,
+      text,
+    } = await fetchSBTET(url, "ATTENDANCE");
 
     if (!response.ok) {
       return res.status(response.status).json({
         success: false,
-        message: "SBTET attendance service returned an error.",
+        message:
+          "SBTET attendance service returned an error.",
       });
     }
 
@@ -125,22 +137,26 @@ app.get("/api/attendance", async (req, res) => {
     } catch {
       return res.status(500).json({
         success: false,
-        message: "Invalid response from SBTET attendance API.",
+        message:
+          "Invalid response from SBTET attendance API.",
       });
     }
 
-    const student = Array.isArray(data?.Table)
-      ? data.Table[0]
-      : null;
+    const student =
+      Array.isArray(data?.Table)
+        ? data.Table[0]
+        : null;
 
-    const dailyAttendance = Array.isArray(data?.Table1)
-      ? data.Table1
-      : [];
+    const dailyAttendance =
+      Array.isArray(data?.Table1)
+        ? data.Table1
+        : [];
 
     if (!student) {
       return res.status(404).json({
         success: false,
-        message: "No attendance record found for this PIN.",
+        message:
+          "No attendance record found for this PIN.",
       });
     }
 
@@ -155,12 +171,13 @@ app.get("/api/attendance", async (req, res) => {
       student.TotalWorkingDays ??
       0;
 
-    const absentDays = dailyAttendance.filter(
-      (item) =>
-        String(item?.Status || "")
-          .trim()
-          .toUpperCase() === "A"
-    ).length;
+    const absentDays =
+      dailyAttendance.filter(
+        (item) =>
+          String(item?.Status || "")
+            .trim()
+            .toUpperCase() === "A"
+      ).length;
 
     const percentage =
       student.Percentage ?? 0;
@@ -169,10 +186,12 @@ app.get("/api/attendance", async (req, res) => {
       student.TotalPercentage ?? 0;
 
     const examsNDP =
-      student.ExamsNDP ?? presentDays;
+      student.ExamsNDP ??
+      presentDays;
 
     const examsPer =
-      student.ExamsPer ?? totalPercentage;
+      student.ExamsPer ??
+      totalPercentage;
 
     const examsWorkingDays =
       student.ExamsWorkingDays ??
@@ -225,15 +244,19 @@ app.get("/api/attendance", async (req, res) => {
         dailyAttendance,
       },
     });
+
   } catch (error) {
-    console.error("Attendance error:", error.message);
+    console.error(
+      "Attendance error:",
+      error.message
+    );
 
     return res.status(500).json({
       success: false,
       message:
         error.name === "AbortError"
           ? "SBTET attendance request timed out."
-          : "Unable to fetch attendance from SBTET.",
+          : `Unable to fetch attendance from SBTET: ${error.message}`,
     });
   }
 });
@@ -243,26 +266,26 @@ app.get("/api/attendance", async (req, res) => {
 ===================================================== */
 
 app.get("/api/result", async (req, res) => {
+
   const pin = String(req.query.pin || "")
     .trim()
     .toUpperCase();
 
-  const scheme = String(req.query.scheme || "C24")
-    .trim()
-    .toUpperCase();
-
-  const semester = String(req.query.semester || "")
-    .trim()
-    .toUpperCase();
-
-  const examType = String(req.query.examType || "")
-    .trim();
-
-  const examMonthYear = String(
-    req.query.examMonthYear || ""
+  const scheme = String(
+    req.query.scheme || "C24"
   )
     .trim()
     .toUpperCase();
+
+  const semester = String(
+    req.query.semester || ""
+  )
+    .trim()
+    .toUpperCase();
+
+  const examType = String(
+    req.query.examType || ""
+  ).trim();
 
   if (!pin) {
     return res.status(400).json({
@@ -272,7 +295,7 @@ app.get("/api/result", async (req, res) => {
   }
 
   /* =================================================
-     SEMESTER MAP
+     SEMESTER IDs
   ================================================= */
 
   const semesterMap = {
@@ -284,7 +307,8 @@ app.get("/api/result", async (req, res) => {
     "6SEM": "6",
   };
 
-  const semYearId = semesterMap[semester];
+  const semYearId =
+    semesterMap[semester];
 
   if (!semYearId) {
     return res.status(400).json({
@@ -294,26 +318,59 @@ app.get("/api/result", async (req, res) => {
   }
 
   /* =================================================
-     SCHEME MAP
+     SCHEME IDs
   ================================================= */
 
   const schemeMap = {
     C24: "11",
-    C18: "18",
-    C16: "16",
-    C26: process.env.SBTET_C26_SCHEME_ID || "",
+
+    C26:
+      process.env.SBTET_C26_SCHEME_ID || "",
+
+    ER2020:
+      process.env.SBTET_ER2020_SCHEME_ID || "",
+
+    C21:
+      process.env.SBTET_C21_SCHEME_ID || "",
+
+    C09:
+      process.env.SBTET_C09_SCHEME_ID || "",
+
+    C08:
+      process.env.SBTET_C08_SCHEME_ID || "",
+
+    C05:
+      process.env.SBTET_C05_SCHEME_ID || "",
+
+    C18:
+      process.env.SBTET_C18_SCHEME_ID || "",
+
+    C16S:
+      process.env.SBTET_C16S_SCHEME_ID || "",
+
+    C16:
+      process.env.SBTET_C16_SCHEME_ID || "",
+
+    ER91:
+      process.env.SBTET_ER91_SCHEME_ID || "",
+
+    C14:
+      process.env.SBTET_C14_SCHEME_ID || "",
   };
 
-  const schemeId = schemeMap[scheme];
+  const schemeId =
+    schemeMap[scheme];
 
   if (!schemeId) {
     return res.status(400).json({
       success: false,
-      message: `SchemeId for ${scheme} is not configured.`,
+      message:
+        `SchemeId for ${scheme} is not configured in server/.env.`,
     });
   }
 
   try {
+
     /* =================================================
        MID-1 / MID-2
     ================================================= */
@@ -322,6 +379,7 @@ app.get("/api/result", async (req, res) => {
       examType === "Mid-1" ||
       examType === "Mid-2"
     ) {
+
       const examTypeId =
         examType === "Mid-1"
           ? "1"
@@ -335,11 +393,16 @@ app.get("/api/result", async (req, res) => {
         `&SemYearId=${encodeURIComponent(semYearId)}`;
 
       console.log(
-        `Result request: ${pin} | ${examType}`
+        `Result request: ${scheme} | ${semester} | ${examType}`
       );
 
-      const { response, text } =
-        await fetchSBTET(url);
+      const {
+        response,
+        text,
+      } = await fetchSBTET(
+        url,
+        "MID RESULT"
+      );
 
       if (!response.ok) {
         return res.status(response.status).json({
@@ -361,21 +424,29 @@ app.get("/api/result", async (req, res) => {
         });
       }
 
-      const report = Array.isArray(data)
-        ? data[0]
-        : data;
+      const report =
+        Array.isArray(data)
+          ? data[0]
+          : data;
 
       const subjects =
-        Array.isArray(report?.studentWiseReport)
+        Array.isArray(
+          report?.studentWiseReport
+        )
           ? report.studentWiseReport
           : [];
 
       const student =
-        Array.isArray(report?.studentInfo)
+        Array.isArray(
+          report?.studentInfo
+        )
           ? report.studentInfo[0]
           : null;
 
-      if (!student && subjects.length === 0) {
+      if (
+        !student &&
+        subjects.length === 0
+      ) {
         return res.status(404).json({
           success: false,
           message:
@@ -436,227 +507,384 @@ app.get("/api/result", async (req, res) => {
     ================================================= */
 
     if (examType === "Semester") {
-      if (!examMonthYear) {
-        return res.status(400).json({
-          success: false,
-          message:
-            "Please select Exam Month & Year for the Semester result.",
-        });
-      }
 
       /*
-        Add more verified combinations here
-        when required.
+        ExamMonthYearId values are now read from .env.
+
+        Example:
+
+        SBTET_EXAM_MONTH_YEAR_IDS=103,102,101,100,...
+
+        The student does NOT enter the
+        ExamMonthYearId.
       */
 
-      const examMonthYearMap = {
-        "5SEM": {
-          "APR-2026": "4",
-        },
-      };
+      const examMonthYearIds = String(
+        process.env.SBTET_EXAM_MONTH_YEAR_IDS || ""
+      )
+        .split(",")
+        .map((id) => id.trim())
+        .filter(Boolean);
 
-      const examMonthYearId =
-        examMonthYearMap[semester]?.[examMonthYear];
-
-      if (!examMonthYearId) {
-        return res.status(400).json({
+      if (examMonthYearIds.length === 0) {
+        return res.status(500).json({
           success: false,
           message:
-            `Exam Month & Year is not configured for ${semester}.`,
+            "SBTET_EXAM_MONTH_YEAR_IDS is not configured in server/.env.",
         });
       }
 
       const examTypeId = "5";
 
       const studentTypeId =
-        process.env.SBTET_STUDENT_TYPE_ID || "1";
+        process.env.SBTET_STUDENT_TYPE_ID ||
+        "1";
 
-      const url =
-        `${SEMESTER_RESULT_API}` +
-        `?ExamMonthYearId=${encodeURIComponent(examMonthYearId)}` +
-        `&ExamTypeId=${encodeURIComponent(examTypeId)}` +
-        `&Pin=${encodeURIComponent(pin)}` +
-        `&SchemeId=${encodeURIComponent(schemeId)}` +
-        `&SemYearId=${encodeURIComponent(semYearId)}` +
-        `&StudentTypeId=${encodeURIComponent(studentTypeId)}`;
+      let foundStudent = null;
+      let foundSubjects = [];
+      let foundExamMonthYearId = null;
 
-      console.log(
-        `Result request: ${pin} | Semester`
-      );
+      let lastSbtetStatus = null;
+      let lastSbtetMessage = null;
 
-      const { response, text } =
-        await fetchSBTET(url);
+      /*
+        =================================================
+        AUTOMATIC EXAM MONTH/YEAR SEARCH
+        =================================================
 
-      if (!response.ok) {
-        return res.status(response.status).json({
-          success: false,
-          message:
-            "SBTET semester result service returned an error.",
-        });
-      }
+        IMPORTANT:
 
-      let data;
+        A response containing only studentInfo
+        is NOT considered a valid semester result.
 
-      try {
-        data = parseSBTETResponse(text);
-      } catch {
-        return res.status(500).json({
-          success: false,
-          message:
-            "Invalid response from SBTET semester API.",
-        });
-      }
+        The backend requires actual subject records.
+      */
 
-      const report = Array.isArray(data)
-        ? data[0]
-        : data;
+      for (
+        const examMonthYearId
+        of examMonthYearIds
+      ) {
 
-      const subjects =
-        Array.isArray(report?.studentWiseReport)
-          ? report.studentWiseReport
-          : [];
+        const url =
+          `${SEMESTER_RESULT_API}` +
+          `?ExamMonthYearId=${encodeURIComponent(examMonthYearId)}` +
+          `&ExamTypeId=${encodeURIComponent(examTypeId)}` +
+          `&Pin=${encodeURIComponent(pin)}` +
+          `&SchemeId=${encodeURIComponent(schemeId)}` +
+          `&SemYearId=${encodeURIComponent(semYearId)}` +
+          `&StudentTypeId=${encodeURIComponent(studentTypeId)}`;
 
-      const student =
-        Array.isArray(report?.studentInfo)
-          ? report.studentInfo[0]
-          : null;
+        console.log(
+          `Checking ${semester} with ExamMonthYearId ${examMonthYearId}`
+        );
 
-      const subjectGradeInfo =
-        Array.isArray(report?.branchSubjectGradeInfo)
-          ? report.branchSubjectGradeInfo
-          : [];
+        let response;
+        let text;
 
-      const studentSGPACGPAInfo =
-        Array.isArray(report?.studentSGPACGPAInfo)
-          ? report.studentSGPACGPAInfo
-          : [];
+        try {
 
-      const studentActivities =
-        Array.isArray(report?.studentActvities)
-          ? report.studentActvities
-          : [];
+          const result =
+            await fetchSBTET(
+              url,
+              `SEMESTER RESULT - ID ${examMonthYearId}`
+            );
 
-      const studentSubjectTotal =
-        Array.isArray(report?.studentSubjectTotal)
-          ? report.studentSubjectTotal
-          : [];
+          response = result.response;
+          text = result.text;
 
-      const cumulativeGradeInfo =
-        Array.isArray(report?.CumulativeGradeInfo)
-          ? report.CumulativeGradeInfo
-          : [];
+        } catch (error) {
 
-      if (!student && subjects.length === 0) {
-        return res.status(404).json({
-          success: false,
-          message:
-            "No semester result found for the selected details.",
-        });
-      }
-
-      /* =================================================
-         SUMMARY
-      ================================================= */
-
-      const totalMarks = subjects.reduce(
-        (total, subject) => {
-          const marks = Number(
-            subject?.SubjectTotal
+          console.error(
+            `ExamMonthYearId ${examMonthYearId} failed:`,
+            error.message
           );
 
-          return total +
-            (Number.isFinite(marks)
-              ? marks
-              : 0);
-        },
-        0
-      );
+          lastSbtetMessage =
+            error.message;
 
-      const totals =
-        studentSubjectTotal[0] || {};
+          continue;
+        }
 
-      const sgpa =
-        studentSGPACGPAInfo[0]?.SGPA ?? null;
+        lastSbtetStatus =
+          response.status;
 
-      const cgpa =
-        studentSGPACGPAInfo[0]?.CGPA ?? null;
+        if (!response.ok) {
+
+          console.log(
+            `ExamMonthYearId ${examMonthYearId} returned HTTP ${response.status}`
+          );
+
+          continue;
+        }
+
+        let data;
+
+        try {
+
+          data =
+            parseSBTETResponse(text);
+
+        } catch (error) {
+
+          console.log(
+            `ExamMonthYearId ${examMonthYearId} returned invalid JSON.`
+          );
+
+          continue;
+        }
+
+        /*
+          SBTET may return either:
+
+          {
+            studentInfo: [],
+            studentWiseReport: []
+          }
+
+          or an array containing report objects.
+        */
+
+        const reports =
+          Array.isArray(data)
+            ? data
+            : [data];
+
+        let matchedStudent = null;
+        let matchedSubjects = [];
+
+        /*
+          Check every report.
+        */
+
+        for (const report of reports) {
+
+          if (
+            !report ||
+            typeof report !== "object"
+          ) {
+            continue;
+          }
+
+          const reportSubjects =
+            Array.isArray(
+              report.studentWiseReport
+            )
+              ? report.studentWiseReport
+              : [];
+
+          const reportStudents =
+            Array.isArray(
+              report.studentInfo
+            )
+              ? report.studentInfo
+              : [];
+
+          /*
+            THIS IS THE IMPORTANT FIX.
+
+            Do not accept a response containing
+            only student information.
+
+            Actual subject records are required.
+          */
+
+          if (reportSubjects.length === 0) {
+            continue;
+          }
+
+          const reportStudent =
+            reportStudents.length > 0
+              ? reportStudents[0]
+              : null;
+
+          /*
+            Check returned semester.
+          */
+
+          const returnedSemester =
+            String(
+              reportStudent?.Sem ||
+              reportStudent?.Semester ||
+              ""
+            )
+              .trim()
+              .toUpperCase();
+
+          if (
+            returnedSemester &&
+            returnedSemester !== semester
+          ) {
+
+            console.log(
+              `Rejected ID ${examMonthYearId}: requested ${semester}, returned ${returnedSemester}`
+            );
+
+            continue;
+          }
+
+          matchedStudent =
+            reportStudent;
+
+          matchedSubjects =
+            reportSubjects;
+
+          break;
+        }
+
+        /*
+          No subjects found for this ID.
+          Try the next ExamMonthYearId.
+        */
+
+        if (
+          matchedSubjects.length === 0
+        ) {
+
+          console.log(
+            `ExamMonthYearId ${examMonthYearId}: no semester subjects found.`
+          );
+
+          continue;
+        }
+
+        /*
+          VALID RESULT FOUND
+        */
+
+        foundStudent =
+          matchedStudent;
+
+        foundSubjects =
+          matchedSubjects;
+
+        foundExamMonthYearId =
+          examMonthYearId;
+
+        console.log(
+          `VALID RESULT FOUND: ${semester}, ExamMonthYearId ${examMonthYearId}, Subjects: ${foundSubjects.length}`
+        );
+
+        break;
+      }
+
+      /*
+        =================================================
+        NO RESULT FOUND
+        =================================================
+      */
+
+      if (
+        foundSubjects.length === 0
+      ) {
+
+        return res.status(404).json({
+          success: false,
+
+          message:
+            `No ${semester} semester subject records were found for this PIN.`,
+
+          details: {
+            semester,
+            scheme,
+            examType: "Semester",
+            checkedExamMonthYearIds:
+              examMonthYearIds,
+            lastSbtetStatus,
+            lastSbtetMessage,
+          },
+        });
+      }
+
+      /*
+        =================================================
+        TOTAL MARKS
+        =================================================
+      */
+
+      const totalMarks =
+        foundSubjects.reduce(
+          (total, subject) => {
+
+            const marks =
+              Number(
+                subject?.SubjectTotal
+              );
+
+            return (
+              total +
+              (
+                Number.isFinite(marks)
+                  ? marks
+                  : 0
+              )
+            );
+
+          },
+          0
+        );
+
+      /*
+        =================================================
+        FINAL RESPONSE
+        =================================================
+      */
 
       return res.json({
         success: true,
         source: "SBTET",
 
         data: {
+
           student: {
+
             pin:
-              student?.Pin ||
+              foundStudent?.Pin ||
+              foundStudent?.PIN ||
               pin,
 
             name:
-              student?.StudentName ||
+              foundStudent?.StudentName ||
+              foundStudent?.Name ||
               null,
 
             branchName:
-              student?.BranchName ||
+              foundStudent?.BranchName ||
+              foundStudent?.Branch ||
               null,
 
             branchCode:
-              student?.BranchCode ||
+              foundStudent?.BranchCode ||
               null,
 
             semester:
-              student?.Sem ||
+              foundStudent?.Sem ||
+              foundStudent?.Semester ||
               semester,
 
             collegeCode:
-              student?.CollegeCode ||
+              foundStudent?.CollegeCode ||
               null,
 
             collegeName:
-              student?.CollegeName ||
+              foundStudent?.CollegeName ||
               null,
 
             examination:
-              student?.ExamType ||
+              foundStudent?.ExamType ||
               "Semester",
 
             examMonthYear:
-              student?.ExamMonthYear ||
-              examMonthYear,
+              foundStudent?.ExamMonthYear ||
+              null,
+
+            examMonthYearId:
+              foundExamMonthYearId,
           },
 
-          subjects,
+          subjects:
+            foundSubjects,
 
-          subjectGradeInfo,
-
-          studentSGPACGPAInfo,
-
-          studentActivities,
-
-          studentSubjectTotal,
-
-          cumulativeGradeInfo,
-
-          summary: {
-            totalSubjects: subjects.length,
-
-            totalMarks,
-
-            totalCredits:
-              totals.TotalCredits ?? null,
-
-            totalCreditsEarned:
-              totals.TotalCreditsEarned ?? null,
-
-            result:
-              totals.Result ?? null,
-
-            sgpa,
-
-            cgpa,
-
-            academicYear:
-              totals.AcadamicYear ?? null,
-          },
+          totalMarks,
         },
       });
     }
@@ -670,15 +898,24 @@ app.get("/api/result", async (req, res) => {
       message:
         "Invalid exam type. Select Mid-1, Mid-2 or Semester.",
     });
+
   } catch (error) {
-    console.error("Result error:", error.message);
+
+    console.error("");
+    console.error("=================================");
+    console.error("RESULT ERROR");
+    console.error("Name:", error.name);
+    console.error("Message:", error.message);
+    console.error("Stack:", error.stack);
+    console.error("=================================");
+    console.error("");
 
     return res.status(500).json({
       success: false,
       message:
         error.name === "AbortError"
           ? "SBTET result request timed out."
-          : "Unable to fetch result from SBTET.",
+          : `SBTET request failed: ${error.message}`,
     });
   }
 });
@@ -699,8 +936,12 @@ app.use((req, res) => {
    START SERVER
 ===================================================== */
 
-app.listen(PORT, "0.0.0.0", () => {
-  console.log(
-    `Server running on http://localhost:${PORT}`
-  );
-});
+app.listen(
+  PORT,
+  "0.0.0.0",
+  () => {
+    console.log(
+      `Server running on http://localhost:${PORT}`
+    );
+  }
+);
