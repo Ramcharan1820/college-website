@@ -84,7 +84,7 @@ function Result() {
       );
 
       const response = await fetch(
-        `http://localhost:5000/api/result?${params.toString()}`
+        `${import.meta.env.VITE_API_BASE_URL}/api/result?${params.toString()}`
       );
 
       const data = await response.json();

@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from "react";
 import "./Attendance.css";
 
-const API_URL = "http://localhost:5000/api/attendance";
+const API_URL = `${import.meta.env.VITE_API_BASE_URL}/api/attendance`;
 
 function Attendance() {
   const [pin, setPin] = useState("");
